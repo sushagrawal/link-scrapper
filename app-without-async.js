@@ -56,6 +56,7 @@ function scrapNextUrl(url, linkArray){
         res.on('end', function() {
             var array = makeLinkArray(pageData);
             uploadToCSV(array);
+            linkArray.concat(array);
             if(linkArray.length >0 ){
                 url = linkArray[0];
                 linkArray.shift();

@@ -58,9 +58,12 @@ function uploadToCSV(linkArray){
 var requestApi = function(url, next){
     if (/^https?:\/\//i.test(url)) {
         request(url, function (error, response, html) {
-            var linkArray = makeLinkArray(html);
-            if( linkArray.length >0 ){
+             var linkArray;
+            if(html)
+                linkArray = makeLinkArray(html);
+            if( linkArray && linkArray.length >0 ){
                 uploadToCSV(linkArray);
+                scrapeEachLink(linkArray);
                 next(error); //this callback is for async to know about error or successful response. 
             }
         });
